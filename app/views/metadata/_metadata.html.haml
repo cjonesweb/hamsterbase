@@ -1,0 +1,6 @@
+%li
+  = metadata.name + " - " + metadata.content
+  -if can? :manage, metadata
+    = link_to 'Edit', edit_metadatum_path(metadata, :came_from_stash => "TRUE")
+    = " - "
+    = link_to 'Delete', metadatum_path(metadata, :came_from_stash => "TRUE"), :method => :delete, :data => { :confirm => 'Are you sure?'}

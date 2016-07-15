@@ -1,0 +1,6 @@
+.stash_short
+  %ul
+    %li= link_to stash.title, stash_path(stash)
+    %li= stash.body
+    - unless stash.url.blank?
+      %li= stash.url

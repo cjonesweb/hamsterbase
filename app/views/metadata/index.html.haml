@@ -1,0 +1,23 @@
+%h1 Listing metadata
+
+%table
+  %tr
+    %th Stash
+    %th Name
+    %th Content
+    %th
+    %th
+    %th
+
+  - @metadata.each do |metadatum|
+    %tr
+      %td= metadatum.stash_id
+      %td= metadatum.name
+      %td= metadatum.content
+      %td= link_to 'Show', metadatum
+      %td= link_to 'Edit', edit_metadatum_path(metadatum)
+      %td= link_to 'Destroy', metadatum, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Metadatum', new_metadatum_path

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Stash ID:
+  = @stash_tunnel.stash_id
+%p
+  %b Network Stash ID:
+  = @stash_tunnel.network_stash_id
+%p
+  %b Comment:
+  = @stash_tunnel.comment
+
+= link_to 'Edit', edit_stash_tunnel_path(@stash_tunnel)
+\|
+= link_to 'Back', stash_tunnels_path

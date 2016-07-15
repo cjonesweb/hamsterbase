@@ -1,0 +1,13 @@
+- if comment.moderated == TRUE or can? :manage, Comment
+  %li= comment.username
+  %li= comment.body
+  - if can? :manage, Comment
+    %li= "Moderated? #{comment.moderated}"
+  
+  %li= link_to 'Reply to this comment', new_comment_path + "?parent_id=#{comment.id}&amp;came_from_stash=TRUE"
+  - if can? :manage, Comment
+    %li= link_to 'Edit', edit_comment_path(comment) + "?came_from_stash=TRUE"
+
+  -unless comment.children.blank?
+    .child_comment
+      = render :partial => "comments/comment", :collection => comment.children

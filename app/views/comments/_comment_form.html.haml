@@ -1,0 +1,26 @@
+Leave a comment (Your email is not required. If you do provide it, it will not be displayed, shared, sold or otherwise mistreated. )
+= form_for @new_comment do |f|
+  - if @new_comment.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@new_comment.errors.count, "error")} prohibited this comment from being saved:"
+      %ul
+        - @new_comment.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = hidden_field_tag :came_from_stash, "TRUE"
+  .field
+    = f.label :stash_id
+    = f.hidden_field :stash_id
+  .field
+    = f.label :username
+    = f.text_field :username
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :body
+    = f.text_area :body
+  
+  .actions
+    = f.submit 'Save'

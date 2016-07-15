@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Stash:
+  = @metadatum.stash_id
+%p
+  %b Name:
+  = @metadatum.name
+%p
+  %b Content:
+  = @metadatum.content
+
+= link_to 'Edit', edit_metadatum_path(@metadatum)
+\|
+= link_to 'Back', metadata_path

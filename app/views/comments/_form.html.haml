@@ -1,0 +1,36 @@
+- if @parent_coment
+  .response_to
+  In response to:
+  =render :partial => "comments/comment", :object => @parent_comment
+
+
+= form_for @comment do |f|
+  - if @comment.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+      %ul
+        - @comment.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :username
+    = f.text_field :username
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :body
+    = f.text_area :body
+  - if @parent_comment
+    .field
+      = hidden_field_tag :parent_id, @parent_comment.id
+      = f.hidden_field :stash_id, :value => @parent_comment.stash_id
+  - if @came_from_stash
+    .field
+      = hidden_field_tag :came_from_stash, "TRUE"
+  - if can? :manage, Comment
+    = f.label :moderated
+    = f.check_box :moderated
+      
+  .actions
+    = f.submit 'Save'

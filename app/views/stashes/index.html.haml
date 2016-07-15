@@ -1,0 +1,11 @@
+%h1 Stashes
+
+%p#notice= notice
+
+.main_page_content
+  = render @stashes
+  = will_paginate @stashes
+
+.actions
+  -if can? :manage, Stash
+    = link_to 'New Stash', new_stash_path

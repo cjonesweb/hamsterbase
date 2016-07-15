@@ -1,0 +1,12 @@
+- Rails.logger.debug @stash.inspect
+- Rails.logger.debug @stashes_unpaged.inspect
+
+=form_for @stash do |f|
+  .field
+    = f.hidden_field :id
+  .field
+    = hidden_field_tag :create_tunnel, TRUE
+  .field
+    = collection_select :stash, :id, @stashes_unpaged, :id, :title
+  .actions
+    = f.submit 'Save'

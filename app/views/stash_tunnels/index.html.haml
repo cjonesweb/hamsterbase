@@ -1,0 +1,23 @@
+%h1 Listing stash_tunnels
+
+%table
+  %tr
+    %th Stash ID
+    %th Network Stash ID
+    %th Comment
+    %th
+    %th
+    %th
+
+  - @stash_tunnels.each do |stash_tunnel|
+    %tr
+      %td= stash_tunnel.stash_id
+      %td= stash_tunnel.network_stash_id
+      %td= stash_tunnel.comment
+      %td= link_to 'Show', stash_tunnel
+      %td= link_to 'Edit', edit_stash_tunnel_path(stash_tunnel)
+      %td= link_to 'Destroy', stash_tunnel, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Stash tunnel', new_stash_tunnel_path

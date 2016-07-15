@@ -1,0 +1,30 @@
+.stash_long
+  %ul
+    %li= link_to stash_long.title, stash_path(stash_long)
+    %li= stash_long.body
+    - unless stash_long.url.blank?
+      %li= stash_long.url
+    - unless stash_long.parent.blank?
+      %li
+        Expanded from:
+        = link_to stash_long.parent.title, stash_path(stash_long.parent) 
+    %li= stash_long.created_at
+    %li= stash_long.updated_at
+    -unless stash_long.blob_file_name.blank?
+      %li
+        = link_to stash_long.blob_file_name, stash_long.blob.url
+        = stash_long.blob_content_type
+    -unless stash_long.image_file_name.blank?
+      %li
+        = link_to stash_long.image_file_name, stash_long.image.url
+        = stash_long.image_content_type
+        = image_tag stash_long.image.url :medium
+
+
+-if can? :manage, Stash 
+  .actions 
+    = link_to 'Edit this stash', edit_stash_path(stash_long)
+    |
+    = link_to 'Expand from stash', new_stash_path(:parent_id => stash_long.id)
+    |
+    = link_to 'Delete Stash', stash_long, :method => :delete, :data => { :confirm => 'Are you sure?' }

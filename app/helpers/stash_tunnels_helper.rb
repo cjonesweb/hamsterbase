@@ -1,0 +1,2 @@
+module StashTunnelsHelper
+end

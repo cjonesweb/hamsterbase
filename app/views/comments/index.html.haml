@@ -1,0 +1,26 @@
+%h1 Listing comments
+
+%table
+  %tr
+    %th Stash
+    %th Username
+    %th Email
+    %th Body
+    %th Parent
+    %th
+    %th
+    %th
+
+  - @comments.each do |comment|
+    - if comment.moderated == TRUE or can? :manage, Comment
+      %tr
+        %td= comment.stash_id
+        %td= comment.username
+        %td= comment.email
+        %td= comment.body
+        %td= comment.parent_id
+        %td= link_to 'Show', comment
+        -if can? :manage, Comment
+          %td= link_to 'Edit', edit_comment_path(comment)
+          %td= link_to 'Destroy', comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

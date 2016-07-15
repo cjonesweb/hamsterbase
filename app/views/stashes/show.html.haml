@@ -1,0 +1,39 @@
+%p#notice= notice
+
+-Rails.logger.debug "@stash #{@stash.inspect}"
+
+=render :partial => "stashes/stash_long", :object => @stash
+
+-#puts "Show view @metadata.inspect #{@metadata.inspect}"
+- unless @metadata.blank?
+  .metadata
+    %ul
+      =render :partial => "metadata/metadata", :collection => @metadata
+      
+- if can? :manage, Metadatum
+  .metadata_form
+  Add Metadata
+  = render :partial => "metadata/metadata_form", :object => @stash
+
+- unless @stash.children.blank?
+  .stash_children
+    This stash has been expanded to:
+    =render :partial => "stashes/stash", :collection => @stash.children
+    
+- if can? :manage, @stash
+  .tunnel_form
+    Dig a tunnel to:
+    =render :partial => "stash_tunnels/tunnel_form", :object => @stash
+
+- unless @stash.all_tunnels.blank?
+  .tunnels
+    There are tunnels from this stash to:
+    =render :partial => "stash_tunnels/stash_tunnel", :collection => @stash.all_tunnels
+    
+.comments
+  Comments on this stash
+  =render :partial => "comments/comment", :collection => @comments
+  
+.comment_form
+  Leave a comment
+  =render :partial => "comments/comment_form", :object => @new_comment

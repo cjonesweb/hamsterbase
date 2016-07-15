@@ -1,0 +1,29 @@
+= form_for @stash do |f|
+  - if @stash.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@stash.errors.count, "error")} prohibited this stash from being saved:"
+      %ul
+        - @stash.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :body
+    = f.text_area :body
+  .field
+    = f.label :url
+    = f.text_area :url
+  - unless @parent_stash.blank?  
+    .field
+      = f.label :parent_id, "Expanded from: #{@parent_stash.id} - #{@parent_stash.title}"
+      = f.hidden_field :parent_id
+  .field
+    = f.label "Image Attachment"
+    = f.file_field :image
+  .field
+    = f.label "Blob Attachment"
+    = f.file_field :blob
+  .actions
+    = f.submit 'Save'

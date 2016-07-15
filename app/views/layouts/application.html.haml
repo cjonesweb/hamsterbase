@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hamsterbase</title>
+= stylesheet_link_tag    "application", :media => "all"
+= javascript_include_tag "application"
+= csrf_meta_tags
+</head>
+<body>
+.main_content_area
+  .site_title
+    cjonesweb.com
+  .parent_stash_menu
+    .main_stash_menu_title
+      Main Stashes
+    %ul
+      =render :partial => "stashes/stash_menu", :collection => list_parent_stashes
+  .yield_content
+    =yield
+
+  .login
+    -if user_signed_in? 
+      = link_to 'Logout', destroy_user_session_path, :method => :delete
+    -else
+      = link_to 'Login', new_user_session_path
+
+</body>
+</html>
